@@ -1,6 +1,7 @@
 .NavLink {
     color: #ffc53e;
-    margin:10px;
+    margin-top:10px;
+    padding: 10px;
     float:right;
     font-family:fantasy;
     font-size:xx-large;
