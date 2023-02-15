@@ -11,7 +11,6 @@ import Login from './pages/log_in';
 import Upload from './pages/upload';
 
 
-
 function App() {
   console.log(window.location.pathname);
   return (
