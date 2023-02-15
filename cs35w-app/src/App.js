@@ -15,18 +15,18 @@ function App() {
   console.log(window.location.pathname);
   return (
     <div className='App'>
-      <Navbar />
+      <Navbar/>
       <Route path="/">
-        <Home />
+        <Home/>
       </Route>
       <Route path="/about">
-        <About />
+        <About/>
       </Route>
       <Route path="/log_in">
-        <Login />
+        <Login/>
       </Route>
       <Route path="/upload">
-        <Upload />
+        <Upload/>
       </Route>
     </div>
   );

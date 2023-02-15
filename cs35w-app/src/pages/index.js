@@ -1,4 +1,5 @@
 import React from 'react';
+
 import salad from '../images/salad.jpg';
 import sandwich from '../images/french-dipped.jpg';
 import pasta from '../images/pasta.jpg';
