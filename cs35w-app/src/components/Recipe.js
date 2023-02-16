@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Modal from './Modal';
-import Backdrop from './Backdrop';
 
 
 function Recipe(props) {
@@ -14,12 +13,10 @@ function Recipe(props) {
         setModalIsOpen(false);
     }
 
-
-
     return (
         <div>
             <div>{modalIsOpen && <Modal onCancel={closeModalHandler} />} </div>
-            <img src={require(`../images/${props.text}.jpg`)} alt={props.text} onClick={imageHandler} />
+            <img className='images' src={require(`../images/${props.text}.jpg`)} alt={props.text} onClick={imageHandler} />
 
         </div >
     )
