@@ -11,9 +11,11 @@ import Login from './pages/log_in';
 import Upload from './pages/upload';
 
 
+
 function App() {
   console.log(window.location.pathname);
   return (
+
     <div className='App'>
       <Navbar />
       <Route path="/">
@@ -29,7 +31,9 @@ function App() {
         <Upload />
       </Route>
     </div>
+
   );
 }
 
 export default App;
+
