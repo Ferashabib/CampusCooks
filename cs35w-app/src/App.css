@@ -64,12 +64,21 @@ h2 {
 }
 
 .card {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.734);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  left: 8rem;
+  width: 25em;
+}
+
+.cardTextArea {
+  background-color: rgba(255, 255, 255, 0.734);
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   left: 5rem;
-  width: 20rem;
+  width: 50rem;
 }
 
 .actions {
@@ -101,4 +110,9 @@ h2 {
 
 .images {
   width: 100%;
+}
+
+.rowC {
+  display: flex;
+  flex-direction: row;
 }
