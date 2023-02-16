@@ -9,7 +9,7 @@ function LogininForm(props) {
                     <h2>{props.text}</h2>
                     <label>
                         User Name:
-                        <input type="text" name="username" />
+                        <input className='actions' type="text" name="username" />
                     </label>
                 </div>
 
@@ -17,14 +17,18 @@ function LogininForm(props) {
                 <div>
                     <label>
                         Password :
-                        <input type="text" name="password" />
+                        <input className='actions' type="text" name="password" />
                     </label>
                 </div>
                 <br />
-                <div className='action'>
-                    <input className='btn' onClick={loginHandler} type="submit" value="Log In" /></div>
+                <div className='actions'>
+                    <div className='rowC'>
+                        <input className='btn' onClick={loginHandler} type="submit" value="Create an Account" />
+                        <input className='btn' onClick={loginHandler} type="submit" value="Log In" />
+                    </div>
+                </div>
             </div>
-        </form>
+        </form >
     )
 }
 
