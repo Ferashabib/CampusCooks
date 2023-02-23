@@ -13,6 +13,7 @@ function LogininForm(props) {
         e.preventDefault()
         handleSubmit(dataRef.current.value, dataRef2.current.value)
         dataRef.current.value = ""
+        dataRef2.current.value = ""
     }
 
 
