@@ -1,5 +1,5 @@
 import { addDoc, collection } from "@firebase/firestore"
-import { db } from "../firebase_setup/firebase"
+import { db } from "../firebase"
 
 const handleSubmit = (data1, data2) => {
     const ref = collection(db, "users") // Firebase creates this automatically

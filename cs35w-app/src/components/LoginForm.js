@@ -1,6 +1,9 @@
 import handleSubmit from '../handles/handlesubmit';
 import { useRef } from 'react';
 import { getDatabase, ref, set } from "firebase/database";
+import { auth } from "../firebase";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {Alert} from 'react-native';
 
 // function writeUserData(userId, name, email, imageUrl) {
 //     const db = getDatabase();
@@ -17,15 +20,40 @@ function LogininForm(props) {
     const dataRef2 = useRef()
 
     const submithandler = (e) => {
-        e.preventDefault()
-        handleSubmit(dataRef.current.value, dataRef2.current.value)
-        dataRef.current.value = ""
-        dataRef2.current.value = ""
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, dataRef.current, dataRef2.current)
+            .then((userCredential) => {
+            console.log(userCredential)
+        })
+        .catch((error) => {
+            // switch(error.code) {
+            //     case 'auth/email-already-in-use':
+            //           Alert.alert('Email already in use !')
+            //           break;
+            //  }
+            console.log(error);
+        });
+        //handleSubmit(dataRef.current.value, dataRef2.current.value)
+        //this.dataRef.value = ""
+        //dataRef2.current.value = ""
     }
 
 
-    function loginHandler() {
-        console.log("clicked");
+    const loginHandler = (e) => {
+        //console.log("clicked");
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, dataRef.current, dataRef2.current)
+            .then((userCredential) => {
+            console.log(userCredential)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+        //handleSubmit(dataRef.current.value, dataRef2.current.value)
+        //this.dataRef.current = ""
+
+        //dataRef2.current.value = ""
     }
     return (
         <div>
@@ -35,7 +63,8 @@ function LogininForm(props) {
                         <h2>{props.text}</h2>
                         <label>
                             User Name:
-                            <input type="text" name="username" ref={dataRef} />
+                            <input type="text" name="username" ref={dataRef} 
+                            onChange={(e) => dataRef.current = (e.target.value)}/>
                         </label>
                     </div>
 
@@ -43,7 +72,8 @@ function LogininForm(props) {
                     <div>
                         <label>
                             Password :
-                            <input type="text" name="password" ref={dataRef2} />
+                            <input type="text" name="password" ref={dataRef2} 
+                            onChange={(e) => dataRef2.current = (e.target.value)}/>
                         </label>
                     </div>
                     <br />
