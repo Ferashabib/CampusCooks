@@ -5,10 +5,7 @@ import { auth } from "../firebase";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { Alert } from 'react-native';
 
-<<<<<<< HEAD
-// z
-=======
->>>>>>> main
+
 
 function LogininForm(props) {
     const dataRef = useRef()
