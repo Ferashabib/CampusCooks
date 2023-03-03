@@ -14,7 +14,6 @@ const About = () => {
 
       <h1 className="card">  <GetData collection="recipeAppAbout" document="about" field="headline" /></h1>
       <h3 className="card">  <GetData collection="recipeAppAbout" document="about" field="introduction" /></h3>
-      <h3 className="card">  <GetRecipeID collection="recipeAppAbout" document="about" field="introduction" /></h3>
 
 
 

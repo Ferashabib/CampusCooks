@@ -14,7 +14,6 @@ function GetRecipeID(props) {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "Upload"));
             querySnapshot.forEach((doc) => {
-                //let list;
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 data = (doc.id)
