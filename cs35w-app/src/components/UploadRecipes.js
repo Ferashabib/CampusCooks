@@ -19,18 +19,18 @@ function UploadRecipes() {
     };
 
     return (
-    <div>
-        <h1> Upload your recipe by filling the form here! </h1>
-        <form className='cardTextArea' id="uploadForm">
         <div>
-            <label>
-              Recipe: <br/>
-            </label>
-            <textarea id='Recipe' type='text' rows="10" cols="45" placeholder='Write your recipe here!'/>
+            <h1> Upload your recipe by filling the form here! </h1>
+            <form className='cardTextArea' id="uploadForm">
+                <div>
+                    <label>
+                        Recipe: <br />
+                    </label>
+                    <textarea id='Recipe' type='text' rows="10" cols="45" placeholder='Write your recipe here!' />
+                </div>
+                <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
+            </form>
         </div>
-        <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
-        </form>
-    </div>
     );
 }
 

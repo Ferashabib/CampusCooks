@@ -116,3 +116,17 @@ h2 {
   display: flex;
   flex-direction: row;
 }
+
+div {
+  white-space: pre-line;
+}
+
+p.no-breaks {
+  white-space: nowrap;
+  color: red;
+}
+
+p.with-breaks {
+  white-space: pre-wrap;
+  color: blue;
+}
