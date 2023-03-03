@@ -10,8 +10,7 @@ function UploadRecipes() {
     function handleSubmit(e) {
         e.preventDefault();
         const ref = collection(db, "Upload");
-        onAuthStateChanged(auth, (user) => 
-        {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 let recipe = {
                     Recipe: document.getElementById('Recipe').value,
@@ -24,7 +23,7 @@ function UploadRecipes() {
                 }
                 alert('Your recipe was submitted successfully! :D');
                 document.getElementById("uploadForm").reset();
-            } 
+            }
             else {
                 alert("You must sign in before upload your recipe!");
                 document.getElementById("uploadForm").reset();

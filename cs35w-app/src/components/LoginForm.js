@@ -44,6 +44,8 @@ function LogininForm(props) {
             .then((userCredential) => {
                 console.log(userCredential)
                 document.getElementById("signinForm").reset();
+                alert("Log in successful! :D Redirecting to Homepage.");
+                window.location = "/";
             })
             .catch((error) => {
                 switch (error.code) {
@@ -67,6 +69,7 @@ function LogininForm(props) {
                 <div className='card'>
                     <div>
                         <h2>{props.text}</h2>
+                        <h3>Note: All input are case sensitive.</h3>
                         <label>
                             Email :
                             <input type="text" name="username" ref={dataRef}
