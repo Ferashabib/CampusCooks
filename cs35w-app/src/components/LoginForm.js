@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { Alert } from 'react-native';
 
 
+
 function LogininForm(props) {
     const dataRef = useRef()
     const dataRef2 = useRef()
