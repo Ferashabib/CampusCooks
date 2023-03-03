@@ -37,12 +37,6 @@ function UploadRecipes() {
         <h1> Upload your recipe by filling the form here! </h1>
         <form className='cardTextArea' id="uploadForm">
         <div>
-<<<<<<< Updated upstream
-            <label>
-              Recipe: <br/>
-            </label>
-            <textarea id='Recipe' type='text' rows="10" cols="45" placeholder='Write your recipe here!'/>
-=======
             <h1> Upload your recipe by filling the form here! </h1>
             <h2> Note: You must log in before you can upload your recipe</h2>
             <form className='cardTextArea' id="uploadForm">
@@ -54,7 +48,6 @@ function UploadRecipes() {
                 </div>
                 <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
             </form>
->>>>>>> Stashed changes
         </div>
         <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
         </form>
