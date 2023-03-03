@@ -1,4 +1,4 @@
-import { db } from "../firebase_setup/firebase"
+import { db } from "../firebase"
 import { addDoc, collection } from "@firebase/firestore"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -33,9 +33,6 @@ function UploadRecipes() {
     };
 
     return (
-    <div>
-        <h1> Upload your recipe by filling the form here! </h1>
-        <form className='cardTextArea' id="uploadForm">
         <div>
             <h1> Upload your recipe by filling the form here! </h1>
             <h2> Note: You must log in before you can upload your recipe</h2>
@@ -49,9 +46,6 @@ function UploadRecipes() {
                 <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
             </form>
         </div>
-        <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
-        </form>
-    </div>
     );
 }
 

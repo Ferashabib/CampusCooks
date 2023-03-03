@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Modal from './Modal';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase"
 
 
 function Recipe(props) {
@@ -13,11 +15,11 @@ function Recipe(props) {
         setModalIsOpen(false);
     }
 
+
     return (
         <div>
             <div>{modalIsOpen && <Modal onCancel={closeModalHandler} />} </div>
             <img className='images' src={require(`../images/${props.text}.jpg`)} alt={props.text} onClick={imageHandler} />
-
         </div >
     )
 }

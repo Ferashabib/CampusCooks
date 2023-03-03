@@ -1,8 +1,9 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase_setup/firebase"
+import { db } from "../firebase"
 import { ReactDOM } from "react";
 import { useEffect, useState } from "react";
 import React from "react";
+import { collection, getDocs } from "firebase/firestore";
 
 
 
@@ -30,4 +31,6 @@ function GetData(props) {
 
 
 
+
 export default GetData;
+
