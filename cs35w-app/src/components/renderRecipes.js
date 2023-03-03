@@ -19,7 +19,7 @@ function RenderRecipes(props) {
     for (let i = 0; i < props.recipeIds.length; i++) {
 
         steps.push(<div className="card"><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>)
-
+        steps.push(<div className="card"><GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></div>)
 
     }
 
