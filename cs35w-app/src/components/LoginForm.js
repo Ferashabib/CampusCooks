@@ -44,6 +44,7 @@ function LogininForm(props) {
             .then((userCredential) => {
                 console.log(userCredential)
                 document.getElementById("signinForm").reset();
+                window.location = "/";
             })
             .catch((error) => {
                 switch (error.code) {
