@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 import { updateProfile, getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const edit = () => {
   window.location.assign('/edit')
@@ -8,6 +10,10 @@ const edit = () => {
 const Profile = () => {
   const auth = getAuth();
   const [User, setUser] = useState(null);
+  const [FavoriteColor, setColor] = useState(" ");
+  const [bio, setBio] = useState(" ");
+  const [birthday, setBirthday] = useState(" ");
+  const [gender, setGender] = useState(" ");
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -31,13 +37,45 @@ const Profile = () => {
       });
     }
 
+    const getUserData = async () =>{
+      const docRef = doc(db, "users", User.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setBio(data.bio);
+        setColor(data.FavoriteColor);
+        setBirthday(data.birthday);
+        setGender(data.gender);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    };
+
+    getUserData();
+
     return(
       <div>
         <h1> My profile</h1>
         <img id ="photoHolder" src={User.photoURL} alt="Profile picture" width="100"></img>
-        <h1>Name: {User.displayName}</h1> 
-        <h1>Email: {User.email}</h1>
-        <button onClick={edit}>Edit Profile</button>
+        <button onClick={edit} className='btn'>Edit Profile</button>
+        <h2 className='card'>Name: {User.displayName}</h2> 
+        <h2 className='card'>Email: {User.email}</h2>
+        <h2 className='card'>Join date: {User.metadata.creationTime}</h2> 
+        <h2 className='card'>Last Log in: {User.metadata.lastSignInTime}</h2>
+        <h2 className='card'>FavoriteColor:
+        <p> {FavoriteColor} </p>
+        </h2>
+        <h2 className='card'>Birthday:
+        <p> {birthday} </p>
+        </h2>
+        <h2 className='card'>Gender:
+        <p> {gender} </p>
+        </h2>
+        <h2 className='card'>About Me:
+        <p> {bio} </p>
+        </h2>
       </div>
     )
   };
