@@ -1,6 +1,6 @@
 import handleSubmit from '../handles/handlesubmit';
 import { useRef } from 'react';
-import { getDatabase, ref, set } from "firebase/database";
+import { db } from "../firebase"
 import { auth } from "../firebase";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { Alert } from 'react-native';

@@ -12,6 +12,8 @@ import Home from './pages';
 import About from './pages/about';
 import Login from './pages/log_in';
 import Upload from './pages/upload';
+import Profile from './pages/profile';
+import Edit from './pages/edit';
 
 function App() {
   console.log(window.location.pathname);
@@ -31,6 +33,12 @@ function App() {
       </Route>
       <Route path="/upload">
         <Upload />
+      </Route>
+      <Route path="/user">
+        <Profile />
+      </Route>
+      <Route path="/edit">
+        <Edit />
       </Route>
     </div>
 
