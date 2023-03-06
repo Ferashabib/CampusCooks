@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
 import { updateProfile, getAuth, onAuthStateChanged } from "firebase/auth";
+import { storage } from "../firebase"
+import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
 
 
 const EditProfile = () => { 
     const auth = getAuth();
     const [User, setUser] = useState(null);
-
+    let filename = '';
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -16,40 +18,55 @@ const EditProfile = () => {
       }
     });
 
-    
-    const saveHandler = () => {
+
+    const uploadHandler = (e) => {
+        e.preventDefault();
+        const file = e.target[0].files[0];
+        if(file == null) return;
+        filename = file.name;
+        const photoRef = ref(storage, "/UserImg/" + User.email + "/" + filename);
+        uploadBytes(photoRef, file).then(() => {
+            alert("Image Uploaded");
+        });
+    };
+
+    const saveHandler = async () => {
         const name = document.getElementById("fname").value;
-        console.log(name);
-        const photourl = document.getElementById("photo").value;
-        console.log(name);
+        console.log(filename);
+        if(filename != '')
+        {
+            const photoRef = ref(storage, "/UserImg/" + User.email + "/" + filename);
+            const UserPhotoURL = await getDownloadURL(photoRef);
+            updateProfile(User, {
+                photoURL: UserPhotoURL 
+            });
+        }
         if(name != '')
         {
             updateProfile(User, {
                 displayName: name
             });
         }
-
-        if(photourl != '')
-        {
-            updateProfile(User, {
-                photoURL: photourl
-            });
-        }
-    }
+        document.getElementById("bioform").reset();
+        document.getElementById("photoform").reset();
+    };
 
     return (
         <div>
             <h1> Welcome to edit page. You can edit your information here.</h1>
-            <form className='cardTextArea' id="uploadForm">
+            <form className='cardTextArea' id='bioform'>
                 <div>
                     <label> Username: </label>
                     <input type="text" id="fname" name="fname"></input><br/>
-                    <label> PhotoURL: </label>
-                    <input type="photo" id="photo" name="photo"></input><br/>
                 </div>
                 <br/>
-                <button className='btn' onClick={saveHandler}>Save</button>
             </form>
+            <form onSubmit={uploadHandler} className='cardTextArea' id='photoform'>
+                <label> Photo: </label>
+                <input type="file" />
+                <button type="submit"> Upload Image</button>
+            </form>
+            <button className='btn' onClick={saveHandler}>Save</button>
             
         </div>
     )
