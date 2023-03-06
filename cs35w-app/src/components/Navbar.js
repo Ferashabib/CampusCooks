@@ -1,9 +1,13 @@
 import React from "react";
 import './NavbarElement.css'
+
 function Navbar(){
     return (
         <header>
             <div className="Webname"> Name of our app </div>
+            <a href="/user" className="NavLink">
+                My Profile
+            </a>
             <a href="/about" className="NavLink">
                 About
             </a>

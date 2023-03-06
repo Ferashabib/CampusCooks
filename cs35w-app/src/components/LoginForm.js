@@ -1,8 +1,8 @@
 import handleSubmit from '../handles/handlesubmit';
 import { useRef } from 'react';
-import { getDatabase, ref, set } from "firebase/database";
-import { auth } from "../firebase";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { db, auth} from "../firebase"
+import { doc, setDoc } from "firebase/firestore"; 
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { Alert } from 'react-native';
 
 
@@ -16,6 +16,12 @@ function LogininForm(props) {
         createUserWithEmailAndPassword(auth, dataRef.current, dataRef2.current)
             .then((userCredential) => {
                 console.log(userCredential)
+                setDoc(doc(db, "users", userCredential.user.uid), {
+                    bio: "This user haven't write anything yet",
+                    gender: " ",
+                    birthday: " ",
+                    FavoriteColor: " "
+                })
                 document.getElementById("signinForm").reset();
             })
             .catch((error) => {

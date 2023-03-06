@@ -1,6 +1,6 @@
 .App {
   background-color: #fadfaa;
-  height: 100vh;
+  background-size: auto;
 }
 
 .App-link {
@@ -15,12 +15,7 @@
   font-family: fantasy;
   font-size: xx-large;
 }
-
-header {
-  background-color: rgb(194, 243, 253);
-  height: 10%;
-}
-
+  
 .Webname {
   border: solid;
   font-size: xx-large;
