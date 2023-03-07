@@ -19,8 +19,8 @@ function GetRecipeID(props) {
                 data = (doc.id)
                 //data += list;
                 list.push(data);
-                console.log("11", list)
-                console.log(typeof (list))
+                //console.log("11", list)
+                //console.log(typeof (list))
                 setData(list)
 
 

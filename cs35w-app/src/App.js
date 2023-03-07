@@ -15,6 +15,7 @@ import Login from './pages/log_in';
 import Upload from './pages/upload';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
+import Fav from "./pages/favorite";
 
 function App() {
   console.log(window.location.pathname);
@@ -25,7 +26,7 @@ function App() {
       <Navbar />
       <Route path="/">
         <Home />
-        <Comments currentUserID="1" /*Temporary, still working*/ /> 
+        <Comments currentUserID="1" /*Temporary, still working*/ />
       </Route>
       <Route path="/about">
         <About />
@@ -41,6 +42,9 @@ function App() {
       </Route>
       <Route path="/edit">
         <Edit />
+      </Route>
+      <Route path="/favorite">
+        <Fav />
       </Route>
     </div>
 

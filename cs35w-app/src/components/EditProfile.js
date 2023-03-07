@@ -5,25 +5,25 @@ import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
 
 
-const EditProfile = () => { 
+const EditProfile = () => {
     const auth = getAuth();
     const [User, setUser] = useState(null);
     let filename = '';
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } 
-      else {
-        alert("you are not log in");
-        window.location.assign("/log_in");
-      }
+        if (user) {
+            setUser(user);
+        }
+        else {
+            alert("you are not log in");
+            window.location.assign("/log_in");
+        }
     });
 
 
     const uploadHandler = (e) => {
         e.preventDefault();
         const file = e.target[0].files[0];
-        if(file == null) return;
+        if (file == null) return;
         filename = file.name;
         const photoRef = ref(storage, "/UserImg/" + User.email + "/" + filename);
         uploadBytes(photoRef, file).then(() => {
@@ -36,40 +36,34 @@ const EditProfile = () => {
         const userRef = doc(db, "users", User.uid);
 
         console.log(filename);
-        if(filename != '')
-        {
+        if (filename != '') {
             const photoRef = ref(storage, "/UserImg/" + User.email + "/" + filename);
             const UserPhotoURL = await getDownloadURL(photoRef);
             updateProfile(User, {
-                photoURL: UserPhotoURL 
+                photoURL: UserPhotoURL
             });
         }
-        if(name != '')
-        {
+        if (name != '') {
             updateProfile(User, {
                 displayName: name
             });
         }
-        if(document.getElementById("color").value != " ")
-        {
+        if (document.getElementById("color").value != " ") {
             await updateDoc(userRef, {
                 FavoriteColor: document.getElementById("color").value
             });
         }
-        if(document.getElementById("bio").value != " ")
-        {
+        if (document.getElementById("bio").value != " ") {
             await updateDoc(userRef, {
                 bio: document.getElementById("bio").value
             });
         }
-        if(document.getElementById("gender").value != " ")
-        {
+        if (document.getElementById("gender").value != " ") {
             await updateDoc(userRef, {
                 gender: document.getElementById("gender").value
             });
         }
-        if(document.getElementById("birthday").value != " ")
-        {
+        if (document.getElementById("birthday").value != " ") {
             await updateDoc(userRef, {
                 birthday: document.getElementById("birthday").value
             });
@@ -84,18 +78,18 @@ const EditProfile = () => {
             <form className='cardTextArea' id='bioform'>
                 <div>
                     <label> Username: </label>
-                    <input type="text" id="fname" name="fname"></input><br/><br/>
+                    <input type="text" id="fname" name="fname"></input><br /><br />
                     <label> FavoriteColor: </label>
-                    <input type="text" id="color" name="color"></input><br/><br/>
+                    <input type="text" id="color" name="color"></input><br /><br />
                     <label> Birthday: </label>
-                    <input type="text" id="birthday" name="birthday"></input><br/><br/>
+                    <input type="text" id="birthday" name="birthday"></input><br /><br />
                     <label> Gender: </label>
-                    <input type="text" id="gender" name="gender"></input><br/>
-                    <br/>
+                    <input type="text" id="gender" name="gender"></input><br />
+                    <br />
                     <label> About Me:  <br /> </label>
-                    <textarea type="text" id="bio" name="bio" rows="10" cols="45" ></textarea><br/>
+                    <textarea type="text" id="bio" name="bio" rows="10" cols="45" ></textarea><br />
                 </div>
-                <br/>
+                <br />
             </form>
             <form onSubmit={uploadHandler} className='cardTextArea' id='photoform'>
                 <label> Photo: </label>
@@ -103,7 +97,7 @@ const EditProfile = () => {
                 <button type="submit"> Upload Image</button>
             </form>
             <button className='btn' onClick={saveHandler}>Save</button>
-            
+
         </div>
     )
 }

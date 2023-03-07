@@ -13,9 +13,9 @@ function GetData(props) {
     React.useEffect(() => {
         const fetchData = async () => {
             const response = await getDoc(docRef);
-            console.log(response.data());
+            //console.log(response.data());
             data = response.get(props.field);
-            console.log(data);
+            //console.log(data);
             setData(data);
         };
         fetchData();

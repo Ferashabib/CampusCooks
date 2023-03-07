@@ -1,9 +1,9 @@
 import EditProfile from '../components/EditProfile';
 
 const Edit = () => {
-    return(
+    return (
         <div>
-            <EditProfile/>
+            <EditProfile />
         </div>
     );
 };
