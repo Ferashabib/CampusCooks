@@ -52,7 +52,7 @@ function RenderRecipes(props) {
 
         steps.push(<div className="card" key={'recipe:' + i}><div><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
             <div> <h5>Recipe provided by <GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /> </h5></div>
-            <div> <h5>This recipes has been made <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" /> times</h5></div>
+            <div> <h5>This recipes has been made <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" /> time(s)</h5></div>
 
 
             <div>
