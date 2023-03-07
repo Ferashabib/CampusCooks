@@ -70,7 +70,11 @@ const EditProfile = () => {
         }
         document.getElementById("bioform").reset();
         document.getElementById("photoform").reset();
+
+
+
     };
+
 
     return (
         <div>
@@ -98,7 +102,7 @@ const EditProfile = () => {
             </form>
             <button className='btn' onClick={saveHandler}>Save</button>
 
-        </div>
+        </div >
     )
 }
 

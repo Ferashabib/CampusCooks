@@ -14,7 +14,8 @@ function UploadRecipes() {
             if (user) {
                 let recipe = {
                     Recipe: document.getElementById('Recipe').value,
-                    UserName: user.email
+                    UserName: user.email,
+                    upvotes: 0
                 }
                 try {
                     addDoc(ref, recipe)
