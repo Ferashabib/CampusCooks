@@ -1,11 +1,35 @@
 import { db } from "../firebase"
 import { addDoc, collection } from "@firebase/firestore"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import IngredientsList from "./IngredientsList";
+import React, { useState } from "react";
 
 const auth = getAuth();
 
 
 function UploadRecipes() {
+
+    const [ingredients, setIngredients] = useState(
+        [ {id: 1, value: ""},
+          {id: 2, value: ""},
+        ]
+    )
+    const handleAdd = (e) => {
+        e.preventDefault();
+        const currentsize = ingredients.length;
+        const newIngredient = [ { id: currentsize+1, value: ""} ];
+        setIngredients(
+            ingredients.concat(newIngredient)
+        );
+        
+    };
+    const handleRemove = (e) => {
+        e.preventDefault();
+        const newIngredients = ingredients.slice(0, ingredients.length-1)
+        setIngredients(
+            newIngredients
+        );
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -42,6 +66,11 @@ function UploadRecipes() {
                     </label>
                     <textarea id='Recipe' type='text' rows="10" cols="45" placeholder='Write your recipe here!' />
                 </div>
+                <IngredientsList 
+                onAdd={handleAdd} 
+                onRemove={handleRemove} 
+                ingredients={ingredients}
+                />
                 <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
             </form>
         </div>
