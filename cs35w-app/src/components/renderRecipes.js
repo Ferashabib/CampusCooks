@@ -36,10 +36,10 @@ function RenderRecipes(props) {
                 } catch (err) {
                     console.log(err)
                 }
-                alert('Your recipe was submitted successfully! :D');
+                alert('This recipe is added to your favorite successfully! :D');
             }
             else {
-                alert("You must sign in before upload your recipe!");
+                alert("You must sign in before favoriting this recipe!");
                 window.location.assign("/log_in");
             }
         });
@@ -49,14 +49,25 @@ function RenderRecipes(props) {
     const steps = [];
 
     async function UpvoteHandler(id) {
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
 
-        const ref = doc(db, "Upload", id);
+                const ref = doc(db, "Upload", id);
 
-        await updateDoc(ref, {
-            upvotes: increment(1)
+                await updateDoc(ref, {
+                    upvotes: increment(1)
+                });
+                console.log(ref)
+                window.location.reload(false);
+
+            }
+            else {
+                alert("You must sign in before upvoting this recipe!");
+                window.location.assign("/log_in");
+            }
         });
-        console.log(ref)
-        window.location.reload(false);
+
 
     }
     for (let i = 0; i < props.recipeIds.length; i++) {
