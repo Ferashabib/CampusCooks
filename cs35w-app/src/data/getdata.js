@@ -1,9 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase"
-import { ReactDOM } from "react";
-import { useEffect, useState } from "react";
 import React from "react";
-import { collection, getDocs } from "firebase/firestore";
 
 
 
@@ -21,11 +18,8 @@ function GetData(props) {
         fetchData();
     }, []);
 
-    return (
-        <div>
-            {data}
-        </div>
-    );
+    return data
+
 }
 
 

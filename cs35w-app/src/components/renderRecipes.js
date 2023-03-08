@@ -1,35 +1,23 @@
-
-
-import { doc, getDoc } from "firebase/firestore";
-import { db, storage } from "../firebase"
-import { ReactDOM } from "react";
-import { useEffect, useState } from "react";
+import { db } from "../firebase"
 import React from "react";
-import { collection, getDocs, addDoc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import GetData from "../data/getdata";
-import GetRecipeID from "../data/getRecipeId";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
+
 
 function RenderRecipes(props) {
 
 
     const favHandler = (id) => {
-        //e.preventDefault();
         const auth = getAuth();
-
-        //const ref = collection(db, "Upload");
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-
                 const userRef = doc(db, "users", user.uid);
-                console.log(userRef)
-                console.log(id)
                 try {
                     await updateDoc(userRef, {
                         favorite_recipe: arrayUnion(id)
                     });
-                    //userRef.child("favorite_recipes").push(id)
                 } catch (err) {
                     console.log(err)
                 }
@@ -45,7 +33,7 @@ function RenderRecipes(props) {
 
     const steps = [];
 
-    async function UpvoteHandler(id) {
+    async function MadeThisHandler(id) {
         const auth = getAuth();
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -74,17 +62,15 @@ function RenderRecipes(props) {
             <br></br>
             Recipe:
             <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" />
-            <br></br>
-            By User:
-            <GetData collection="Upload" document={props.recipeIds[i]} field="UserName" />
-            <br></br>
+            <h5>Recipe provided by:<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(props.recipeIds[i]);
                 }}>Favorite</button>
+
                 <button className="btn" onClick={() => {
-                    UpvoteHandler(props.recipeIds[i]);
-                }}>Upvote
+                    MadeThisHandler(props.recipeIds[i]);
+                }}>I Made This
                 <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
                 </button></div></div>)
         steps.push(<br></br>)
@@ -113,4 +99,3 @@ function RenderRecipes(props) {
 
 
 export default RenderRecipes;
-

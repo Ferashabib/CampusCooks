@@ -1,45 +1,45 @@
 import React from 'react';
-import { getAuth } from "firebase/auth";
-import GetFavID from '../data/getFavId';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import RenderRecipes from './renderRecipes';
+import RenderFavs from './RenderFavs';
+import { useEffect, useState } from "react";
 
+function Favorite() {
 
-const Favorite = () => {
-
-    const Greeting = () => {
-        const auth = getAuth();
-        const user = auth.currentUser;
-        if (user) {
-            return user.uid;
-        } else {
-            return null;
-        }
-    }
     const getUserData = async (userid) => {
         const docRef = doc(db, "users", userid);
         const docSnap = await getDoc(docRef);
-        console.log("b4")
         if (docSnap.exists()) {
             const ids = docSnap.data();
-            console.log(ids.favorite_recipe)
-            console.log("after")
             return ids.favorite_recipe
         } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+            console.log("No such  document!");
         }
     };
-    const userid = Greeting();
-    let ids = getUserData(userid);
-    console.log("####", ids)
+
+    let ids;
+    const [data, setData] = useState({});
+    useEffect(() => {
+        const getWeatherFromApiAsync = async () => {
+            const auth = getAuth();
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const uid = user.uid;
+                    ids = await getUserData(uid);
+                    setData(ids);
+                }
+            })
+
+        };
+        getWeatherFromApiAsync();
+    }, []);
+
 
     return (
         <div>
-            User's favorite recipes will be displayed here
-            {/* <div><h1><Greeting /></h1></div>
-            <div id="outer"><h3> <RenderRecipes recipeIds={ids} /></h3></div> */}
+            <h1>Your favorited recipes:</h1>
+            <div id="outer"><h3> <RenderFavs recipeIds={data} /></h3></div>
         </div>
 
     );

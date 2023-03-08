@@ -11,21 +11,20 @@ const favorite = () => {
 
 
 const Home = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [userIsSignin, setuserIsSignin] = useState(false);
   const Greeting = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user) {
-      setModalIsOpen(true);
+      setuserIsSignin(true)
       return "Welcome! " + user.email;
-
     } else {
       return "Welcome! Guest.";
     }
   }
   const FavButton = () => {
     return (
-      <button onClick={favorite} className='btn'>You favorite recipe</button>
+      <button onClick={favorite} className='btn'>Your Favorites</button>
     )
   }
 
@@ -33,11 +32,8 @@ const Home = () => {
   return (
     <div>
       <div><h1><Greeting /></h1></div>
-      <div>{modalIsOpen && <FavButton />} </div>
-
+      <div>{userIsSignin && <FavButton />} </div>
       <div id="outer"><h3> <RenderRecipes recipeIds={ids} /></h3></div>
-
-
 
 
       <Recipe text='salad' />

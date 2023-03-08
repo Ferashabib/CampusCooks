@@ -73,6 +73,7 @@ const EditProfile = () => {
         window.location.assign('/user');
     };
 
+
     return (
         <div>
             <h1> Welcome to edit page. You can edit your information here.</h1>
@@ -99,7 +100,7 @@ const EditProfile = () => {
             </form>
             <button className='btn' onClick={saveHandler}>Save</button>
 
-        </div>
+        </div >
     )
 }
 
