@@ -70,9 +70,7 @@ const EditProfile = () => {
         }
         document.getElementById("bioform").reset();
         document.getElementById("photoform").reset();
-
-
-
+        window.location.assign('/user');
     };
 
 
