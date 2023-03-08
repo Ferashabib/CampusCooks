@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 function IngredientsBox(props) {
     
     return (
         <div>
-        <form>
-            <label for="ingredient">Ingredient {props.id}:&nbsp;
+            <label>Ingredient {props.count}:&nbsp;
             </label>
-            <input type="text" id="ingredient" name="ingredient" size="20">
+            <input type="text" id={props.id} size="20">
             </input>
-        </form>
         </div>
     );
 }

@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { db } from "../firebase";
 import IngredientsBox from "./IngredientsBox";
 
 function IngredientsList(props) {
@@ -8,8 +6,9 @@ function IngredientsList(props) {
         <div>
             <label>Ingredients:</label>
             {props.ingredients.map(ingredient => (
-                <IngredientsBox key={ingredient.id} value={ingredient.value} 
-                id={ingredient.id} />
+                <IngredientsBox key={ingredient.id} 
+                id={"ingredient" + ingredient.id}
+                count={ingredient.id} />
             ))}
             <br></br>
             <button onClick={props.onAdd}>Add
