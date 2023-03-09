@@ -55,14 +55,26 @@ function RenderRecipes(props) {
 
 
     }
-    for (let i = 0; i < props.recipeIds.length; i++) {
 
+    for (let i = 0; i < props.recipeIds.length; i++) {
+        const recipe = () => {
+            console.log(props.recipeIds[i])
+            localStorage.setItem('recipe_id', props.recipeIds[i]);
+            window.location.assign('/recipe')
+
+        }
+        const profile = () => { //Todo
+            // console.log(props.recipeIds[i])
+            // localStorage.setItem('recipe_id', props.recipeIds[i]);
+            // window.location.assign('/recipe')
+
+        }
         steps.push(<div className="card">
-            <GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
-            <br></br>
-            Recipe:
-            <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" />
-            <h5>Recipe provided by:<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
+            <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
+                <br></br>
+                Recipe:
+                <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
+            <h5>Recipe provided by: <button onClick={profile}><GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></button></h5>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(props.recipeIds[i]);
@@ -70,29 +82,28 @@ function RenderRecipes(props) {
 
                 <button className="btn" onClick={() => {
                     MadeThisHandler(props.recipeIds[i]);
-                }}>I Made This
-                <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
+                }}>I Made This  <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
                 </button></div></div>)
         steps.push(<br></br>)
     }
 
     let trisect = steps.length / 3 + (steps.length % 3);
     const left = steps.slice(0, trisect);
-    const middle = steps.slice(trisect, trisect*2);
-    const right = steps.slice(trisect*2, steps.length);
+    const middle = steps.slice(trisect, trisect * 2);
+    const right = steps.slice(trisect * 2, steps.length);
 
     return (
-    <div class="row">
-        <div class="column">
-            {left}
+        <div class="row">
+            <div class="column">
+                {left}
+            </div>
+            <div class="column">
+                {middle}
+            </div>
+            <div class="column">
+                {right}
+            </div>
         </div>
-        <div class="column">
-            {middle}
-        </div>
-        <div class="column">
-            {right}
-        </div>
-    </div>
     );
 
 }
