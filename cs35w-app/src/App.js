@@ -26,7 +26,7 @@ function App() {
       <Navbar />
       <Route path="/">
         <Home />
-        <Comments currentUserID="1" /*Temporary, still working*/ />
+        <Comments currentUserId="1" /*Temporary, still working*/ />
       </Route>
       <Route path="/about">
         <About />
