@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import {getComments, createComment} from "./testApi";
 import {getAuth} from "firebase/auth";
+//import { db } from "../firebase"
+import { addDoc, collection } from "@firebase/firestore"
+import { getFirestore } from "firebase/firestore";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
 const Comments = ({currentUserId}) => {
-    const auth = getAuth();
+    //const auth = getAuth();
     const [backendComments, setBackendComments] = useState([]);
     const [activeComment, setActiveComment] = useState(null)
     const rootComments = backendComments.filter(
@@ -34,7 +37,7 @@ const Comments = ({currentUserId}) => {
 
     return (
     <div className="comments">
-        <div className="comment-form-title">Post Comment</div>
+        <div className="comment-form-title">Comment</div>
         <CommentForm submitLabel="Post" handleSubmit={addComment}/>
         <div className = "comments-container">
             {

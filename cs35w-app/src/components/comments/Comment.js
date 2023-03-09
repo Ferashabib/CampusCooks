@@ -1,5 +1,8 @@
-import {getAuth} from "firebase/auth";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 import CommentForm from "./CommentForm";
+//import { db } from "../firebase"
+import { addDoc, collection } from "@firebase/firestore"
+import { getFirestore } from "firebase/firestore";
 
 const Comment = ({comment, replies, currentUserId, activeComment, setActiveComment, addComment, parentId = null}) => {
     const auth = getAuth();
@@ -7,6 +10,23 @@ const Comment = ({comment, replies, currentUserId, activeComment, setActiveComme
     const isReplying = activeComment && activeComment.type === "replying" &&
     activeComment.id === comment.id;
     const replyId = parentId ? parentId : comment.id;
+
+    // function handleComment(e) {
+    //     e.preventDefault();
+    //     const ref = collection(db, "Comment");
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             let aComment = {
+    //                 id: "1",
+    //                 body: document.getElementById('Comment').value,
+    //                 username: user.email,
+    //                 userId: user.uid,
+    //                 parentId: null,
+    //                 time: "2022",
+    //             }
+    //         }
+    //     });
+    // };
     return (
         <div className="comment">
             <div className ="comment-image-container">
