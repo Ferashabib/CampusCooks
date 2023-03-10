@@ -1,11 +1,12 @@
 import GetData from "../data/getdata";
-
 import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 
 
 import React from 'react';
 import { db } from "../firebase";
+import GetIngredients from "../data/getIngredientList";
 
 
 const Recipe = () => {
@@ -56,31 +57,34 @@ const Recipe = () => {
 
 
     }
+    const [state, setState] = useState()
 
-    // const getUserData = async () => {
-    //     const docRef = doc(db, "Upload", userData);
-    //     const docSnap = await getDoc(docRef);
-    //     if (docSnap.exists()) {
-    //         const ids = docSnap.data();
-    //         console.log(ids.UserId)
-    //         return ids.UserId
-    //     } else {
-    //         console.log("No such  document!");
-    //     }
-    // };
-    // let ids;
-    // const [data, setData] = useState();
-    // useEffect(() => {
-    //     const getData = async () => {
+    function handleSubmit(e) {
 
-    //         ids = await getUserData();
-    //         console.log("ids", ids)
-    //         setData(ids)
-    //         console.log("data", data)
+        e.preventDefault();
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const username = user.email
+                const str = username + '`' + document.getElementById('uploadComment').value
+                const ref = doc(db, "Upload", userData,);
+                console.log(document.getElementById('uploadComment').value)
+                let result = await updateDoc(ref, {
+                    Comments: arrayUnion(str)
+                });
+                setState(result)
+                console.log(result);
 
-    //     };
-    //     getData();
-    // }, []);
+            }
+            else {
+                alert("You must sign in before upload your recipe!");
+                window.location.assign('log_in');
+            }
+            document.getElementById("uploadComment").value = "";
+            window.location.reload(false);
+        });
+    };
+
 
 
     return (
@@ -89,7 +93,9 @@ const Recipe = () => {
             <br></br>
             <GetData collection="Upload" document={userData} field="Recipe" />
             <br></br>
-            <GetData collection="Upload" document={userData} field="UserName" />
+            <div>            <GetIngredients collection="Upload" document={userData} field="Ingredients" />
+            </div>
+            <h3>Recipe provided by: <GetData collection="Upload" document={userData} field="UserName" /></h3>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(userData);
@@ -99,6 +105,19 @@ const Recipe = () => {
                     MadeThisHandler(userData);
                 }}>I Made This  <GetData collection="Upload" document={userData} field="upvotes" />
                 </button></div>
+            <br></br>
+            <GetIngredients collection="Upload" document={userData} field="Comments" />
+            <br></br>
+            <form >
+                <div>
+                    <div> <label>
+                        Comment: <br />
+                    </label>
+                        <textarea id="uploadComment" type='text' rows="10" cols="45" placeholder='Write your comment here!' /></div>
+                    <div> <input className='btn' onClick={handleSubmit} type="submit" value="Submit" /></div>
+
+                </div>
+            </form>
         </div >
     );
 

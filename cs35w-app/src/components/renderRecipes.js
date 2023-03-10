@@ -63,18 +63,13 @@ function RenderRecipes(props) {
             window.location.assign('/recipe')
 
         }
-        const profile = () => { //Todo
-            // console.log(props.recipeIds[i])
-            // localStorage.setItem('recipe_id', props.recipeIds[i]);
-            // window.location.assign('/recipe')
 
-        }
         steps.push(<div className="card">
             <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
                 <br></br>
                 Recipe:
                 <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
-            <h5>Recipe provided by: <button onClick={profile}><GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></button></h5>
+            <h5 onClick={recipe}>Recipe provided by: <GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(props.recipeIds[i]);
