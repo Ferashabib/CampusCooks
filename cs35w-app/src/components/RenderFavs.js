@@ -73,11 +73,11 @@ function RenderFavs(props) {
 
         }
 
-        steps.push(<div className="card" key={'recipe:' + i}>
+        steps.push(<div className="card-center" key={'recipe:' + i}>
             <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></div>
             <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
             <div onClick={recipe}> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
-            <div onClick={recipe}><h5>Recipe provided by<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
+            <div onClick={recipe}><h5>Recipe provided by < GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
             <div><h5>This recipes has been made <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" /> time(s)</h5></div>
             <div>
                 <button className="btn btn--alt" onClick={() => {
@@ -85,7 +85,7 @@ function RenderFavs(props) {
                 }}>Unfavorite</button>
                 <button className="btn" onClick={() => {
                     UpvoteHandler(props.recipeIds[i]);
-                }}>I Made This Today</button></div></div>)
+                }}>I Made This Today</button></div><br></br></div>)
 
     }
 

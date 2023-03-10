@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import React from 'react';
 import { db } from "../firebase";
-import GetIngredients from "../data/getIngredientList";
+import GetLists from "../data/getIngredientList";
 
 
 const Recipe = () => {
@@ -88,14 +88,15 @@ const Recipe = () => {
 
 
     return (
-        <div className="card">
-            <GetData collection="Upload" document={userData} field="Title" />
+        <div className="card-center">
+            <h2><strong><GetData collection="Upload" document={userData} field="Title" /></strong></h2>
+            <div><strong>Recipe provided by: <GetData collection="Upload" document={userData} field="UserName" /></strong></div>
             <br></br>
             <GetData collection="Upload" document={userData} field="Recipe" />
             <br></br>
-            <div>            <GetIngredients collection="Upload" document={userData} field="Ingredients" />
+            <br></br>
+            <div>            <GetLists collection="Upload" document={userData} field="Ingredients" />
             </div>
-            <h3>Recipe provided by: <GetData collection="Upload" document={userData} field="UserName" /></h3>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(userData);
@@ -106,7 +107,7 @@ const Recipe = () => {
                 }}>I Made This  <GetData collection="Upload" document={userData} field="upvotes" />
                 </button></div>
             <br></br>
-            <GetIngredients collection="Upload" document={userData} field="Comments" />
+            <GetLists collection="Upload" document={userData} field="Comments" />
             <br></br>
             <form >
                 <div>
