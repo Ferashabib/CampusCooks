@@ -66,11 +66,17 @@ function RenderFavs(props) {
         });
     }
     for (let i = 0; i < props.recipeIds.length; i++) {
+        const recipe = () => {
+            console.log(props.recipeIds[i])
+            localStorage.setItem('recipe_id', props.recipeIds[i]);
+            window.location.assign('/recipe')
+
+        }
 
         steps.push(<div className="card" key={'recipe:' + i}>
-            <div><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
-            <div> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
-            <div><h5>Recipe provided by<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
+            <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
+            <div onClick={recipe}> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
+            <div onClick={recipe}><h5>Recipe provided by<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
             <div><h5>This recipes has been made <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" /> time(s)</h5></div>
             <div>
                 <button className="btn btn--alt" onClick={() => {
