@@ -36,9 +36,9 @@ const Home = () => {
       <div id="outer"><h3> <RenderRecipes recipeIds={ids} /></h3></div>
 
 
-      <Recipe text='salad' />
+      {/* <Recipe text='salad' />
       <Recipe text='pasta' />
-      <Recipe text='french-dipped' />
+      <Recipe text='french-dipped' /> */}
 
     </div>
 
