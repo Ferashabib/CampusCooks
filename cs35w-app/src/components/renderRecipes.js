@@ -4,6 +4,7 @@ import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import GetData from "../data/getdata";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
+import Comments from './comments/Comments';
 
 
 function RenderRecipes(props) {
@@ -77,8 +78,12 @@ function RenderRecipes(props) {
 
                 <button className="btn" onClick={() => {
                     MadeThisHandler(props.recipeIds[i]);
-                }}>I Made This  <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
-                </button></div></div>)
+
+
+                }}>I Made This
+                <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
+                </button></div><Comments currentUserId = "1"/></div>) //STILL WORKING
+
         steps.push(<br></br>)
     }
 
