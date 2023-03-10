@@ -1,12 +1,11 @@
 import React from "react";
 import './App.css';
-import database from './handles/handlesubmit';
-import { useRef } from 'react';
-import { getDatabase, ref, set } from "firebase/database";
+
 
 import './components/NavbarElement.css';
 import Route from './components/Router';
 import Navbar from './components/Navbar';
+
 
 import Home from './pages';
 import About from './pages/about';
@@ -15,6 +14,8 @@ import Upload from './pages/upload';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
 import Fav from "./pages/favorite";
+import Recipe from "./pages/recipe";
+
 
 function App() {
   console.log(window.location.pathname);
@@ -43,6 +44,9 @@ function App() {
       </Route>
       <Route path="/favorite">
         <Fav />
+      </Route>
+      <Route path="/recipe" >
+        <Recipe />
       </Route>
     </div>
 
