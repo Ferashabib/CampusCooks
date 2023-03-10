@@ -4,7 +4,7 @@ import './NavbarElement.css'
 function Navbar(){
     return (
         <header>
-            <div className="Webname"> Name of our app </div>
+            <div className="Webname"> Campus Cooks </div>
             <a href="/user" className="NavLink">
                 My Profile
             </a>
