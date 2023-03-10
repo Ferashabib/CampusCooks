@@ -74,6 +74,7 @@ function RenderFavs(props) {
         }
 
         steps.push(<div className="card" key={'recipe:' + i}>
+            <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></div>
             <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
             <div onClick={recipe}> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
             <div onClick={recipe}><h5>Recipe provided by<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
