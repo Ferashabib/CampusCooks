@@ -5,7 +5,6 @@ import './App.css';
 import './components/NavbarElement.css';
 import Route from './components/Router';
 import Navbar from './components/Navbar';
-import Comments from './comments/Comments';
 
 
 
@@ -28,7 +27,6 @@ function App() {
       <Navbar />
       <Route path="/">
         <Home />
-        <Comments currentUserID="1" /*Temporary, still working*/ />
       </Route>
       <Route path="/about">
         <About />
