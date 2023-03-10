@@ -80,8 +80,10 @@ function RenderRecipes(props) {
                     MadeThisHandler(props.recipeIds[i]);
 
 
+
                 }}>I Made This <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
                 </button></div></div>)
+
 
         steps.push(<br></br>)
     }
