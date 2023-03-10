@@ -77,7 +77,7 @@ function UploadRecipes() {
     };
 
     return (
-        <div>
+        <div >
             <h1> Upload your recipe! </h1>
             <label> Note: You must log in before you can upload your recipe.</label>
 
