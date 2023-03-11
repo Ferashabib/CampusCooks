@@ -13,9 +13,10 @@ header {
 }
 
 .Webname {
+    font-family: fantasy;
     border: solid;
     font-size: xx-large;
     float: left;
-    padding: 2px;
+    padding: 20px;
     margin: 10px;
 }

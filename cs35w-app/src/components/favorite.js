@@ -42,7 +42,7 @@ function Favorite() {
 
     return (
         <div>
-            <h1>Your favorited recipes:</h1>
+            <h1 className="card-center">Your favorited recipes:</h1>
             <div id="outer"><h3> <RenderFavs recipeIds={data} /></h3></div>
         </div>
 

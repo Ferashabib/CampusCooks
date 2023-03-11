@@ -58,7 +58,7 @@ const Profile = () => {
 
 
     return (
-      <div>
+      <div >
         <h1> My profile</h1>
         <img id="photoHolder" src={User.photoURL} alt="Profile picture" width="100"></img>
         <button onClick={edit} className='btn'>Edit Profile</button>

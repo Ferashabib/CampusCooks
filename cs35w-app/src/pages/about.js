@@ -12,8 +12,8 @@ const About = () => {
   return (
     <div>
 
-      <h1 className="card">  <GetData collection="recipeAppAbout" document="about" field="headline" /></h1>
-      <h3 className="card">  <GetData collection="recipeAppAbout" document="about" field="introduction" /></h3>
+      <h1 className="card-center">  <GetData collection="recipeAppAbout" document="about" field="headline" /></h1>
+      <h3 className="card-center">  <GetData collection="recipeAppAbout" document="about" field="introduction" /></h3>
 
 
 

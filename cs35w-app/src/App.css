@@ -15,7 +15,7 @@
   font-family: fantasy;
   font-size: xx-large;
 }
-  
+
 .Webname {
   border: solid;
   font-size: xx-large;
@@ -64,7 +64,26 @@ h2 {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   left: 8rem;
-  width: 25em;
+  width: 26em;
+}
+
+.card-center {
+  background-color: rgba(255, 255, 255, 0.734);
+  border-radius: 4px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  left: 8rem;
+  width: 26em;
+  margin: 0 auto;
+}
+
+.listcard {
+  background-color: rgba(255, 255, 255, 0.734);
+  border-radius: 4px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  left: 0rem;
+  width: 24em;
 }
 
 .cardTextArea {

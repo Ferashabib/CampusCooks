@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 
 
-function GetIngredients(props) {
+function GetLists(props) {
     let [data, setData] = React.useState([]);
     let list = []
     console.log(props.document)
@@ -32,7 +32,7 @@ function GetIngredients(props) {
         }
         for (let i = 0; i < data.length; i++) {
             const data_show = data[i].split('`')
-            steps.push(<div className='card'><div><h5>{data_show[0]} :</h5></div>{data_show[1]}</div>)
+            steps.push(<div className='listcard'><div>{data_show[0]} :</div>{data_show[1]}</div>)
         }
     } else if (props.field == 'Ingredients') {
         if (data.length > 0) {
@@ -41,6 +41,7 @@ function GetIngredients(props) {
         for (let i = 0; i < data.length; i++) {
             steps.push(<li>{data[i]}</li>)
         }
+        steps.push(<br></br>)
     }
 
 
@@ -48,5 +49,5 @@ function GetIngredients(props) {
 
 
 }
-export default GetIngredients;
+export default GetLists;
 
