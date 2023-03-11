@@ -73,8 +73,8 @@ function RenderFavs(props) {
 
         }
 
-        steps.push(<div className="card-center" key={'recipe:' + i}>
-            <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></div>
+        steps.push(<div className="card" key={'recipe:' + i}>
+            <div onClick={recipe}><h2><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></h2></div>
             <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
             <div onClick={recipe}> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
             <div onClick={recipe}><h5>Recipe provided by < GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
@@ -86,10 +86,27 @@ function RenderFavs(props) {
                 <button className="btn" onClick={() => {
                     UpvoteHandler(props.recipeIds[i]);
                 }}>I Made This Today</button></div><br></br></div>)
-
+        steps.push(<br></br>)
     }
 
-    return (<div>{steps}</div>);
+    let trisect = steps.length / 3 + (steps.length % 3);
+    const left = steps.slice(0, trisect);
+    const middle = steps.slice(trisect, trisect * 2);
+    const right = steps.slice(trisect * 2, steps.length);
+
+    return (
+        <div class="row">
+            <div class="column">
+                {left}
+            </div>
+            <div class="column">
+                {middle}
+            </div>
+            <div class="column">
+                {right}
+            </div>
+        </div>
+    );
 
 }
 
