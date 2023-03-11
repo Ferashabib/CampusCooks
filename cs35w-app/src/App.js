@@ -7,7 +7,6 @@ import Route from './components/Router';
 import Navbar from './components/Navbar';
 
 
-
 import Home from './pages';
 import About from './pages/about';
 import Login from './pages/log_in';
