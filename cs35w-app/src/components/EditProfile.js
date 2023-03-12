@@ -81,7 +81,7 @@ const EditProfile = () => {
                 <div>
                     <label> Username: </label>
                     <input type="text" id="fname" name="fname"></input><br /><br />
-                    <label> FavoriteColor: </label>
+                    <label> Favorite Color: </label>
                     <input type="text" id="color" name="color"></input><br /><br />
                     <label> Birthday: </label>
                     <input type="text" id="birthday" name="birthday"></input><br /><br />

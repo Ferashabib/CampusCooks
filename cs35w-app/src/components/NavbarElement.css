@@ -1,5 +1,5 @@
 .NavLink {
-    color: #ffc53e;
+    /* color: #ffc53e; */
     margin-top: 10px;
     padding: 10px;
     float: right;
@@ -17,6 +17,6 @@ header {
     border: solid;
     font-size: xx-large;
     float: left;
-    padding: 20px;
+    padding: 10px;
     margin: 10px;
 }
