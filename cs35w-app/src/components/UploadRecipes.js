@@ -50,6 +50,14 @@ function UploadRecipes() {
                 listOfIngredients = listOfIngredients.filter(element => element !== "");
                 listOfIngredients = listOfIngredients.map(word => word.toLowerCase());
 
+                const title = document.getElementById('title').value.trim();
+                const rec = document.getElementById('Recipe').value.trim();
+
+                if (title === "" || rec === "") {
+                    alert("Title and recipe cannot be empty");
+                    return;
+                }
+
                 let recipe = {
                     Title: document.getElementById('title').value,
                     Ingredients: listOfIngredients,
