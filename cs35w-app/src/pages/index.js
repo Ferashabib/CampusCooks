@@ -31,7 +31,7 @@ const Home = () => {
   const ids = GetRecipeID();
   return (
     <div>
-      <div><h1><Greeting /></h1></div>
+      <div><h1><Greeting /></h1> </div>
       <div>{userIsSignin && <FavButton />} </div>
       <div id="outer"><h3> <RenderRecipes recipeIds={ids} /></h3></div>
 
