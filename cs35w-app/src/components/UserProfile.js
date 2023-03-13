@@ -67,7 +67,7 @@ const Profile = () => {
         <h2 className='card'>Email: {User.email}</h2>
         <h2 className='card'>Join date: {User.metadata.creationTime}</h2>
         <h2 className='card'>Last Log in: {User.metadata.lastSignInTime}</h2>
-        <h2 className='card'>FavoriteColor: {FavoriteColor} </h2>
+        <h2 className='card'>Favorite Color: {FavoriteColor} </h2>
         <h2 className='card'>Birthday: {birthday} </h2>
         <h2 className='card'>Gender: {gender} </h2>
         <h2 className='card'>About Me:

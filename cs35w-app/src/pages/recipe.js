@@ -62,6 +62,12 @@ const Recipe = () => {
     function handleSubmit(e) {
 
         e.preventDefault();
+        const comment = document.getElementById('uploadComment').value;
+        if (comment.trim() === "") {
+            alert("Comment cannot be empty");
+            return;
+        }
+
         const auth = getAuth();
         onAuthStateChanged(auth, async (user) => {
             if (user) {
