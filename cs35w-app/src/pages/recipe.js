@@ -77,7 +77,7 @@ const Recipe = () => {
 
             }
             else {
-                alert("You must sign in before upload your recipe!");
+                alert("You must sign in before upload your comment!");
                 window.location.assign('log_in');
             }
             document.getElementById("uploadComment").value = "";
