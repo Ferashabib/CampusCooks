@@ -14,14 +14,13 @@ import Upload from './pages/upload';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
 import Fav from "./pages/favorite";
+import Search from "./pages/search";
 import Recipe from "./pages/recipe";
-
 
 function App() {
   console.log(window.location.pathname);
 
   return (
-
     <div className='App'>
       <Navbar />
       <Route path="/">
@@ -45,11 +44,12 @@ function App() {
       <Route path="/favorite">
         <Fav />
       </Route>
+      <Route path="/search">
+        <Search />
       <Route path="/recipe" >
         <Recipe />
       </Route>
     </div>
-
   );
 }
 

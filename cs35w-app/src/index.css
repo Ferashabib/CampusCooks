@@ -23,6 +23,16 @@ code {
   clear: both;
 }
 
+.column2 {
+  float: left;
+  width: 15%;
+}
+
+.column3 {
+  float: left;
+  width: 50%;
+}
+
 .comments {
   margin-top: 20px;
 }
