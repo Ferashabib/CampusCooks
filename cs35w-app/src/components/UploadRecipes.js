@@ -16,22 +16,22 @@ function UploadRecipes() {
 
 
     const [ingredients, setIngredients] = useState(
-        [ {id: 1},
-          {id: 2},
+        [{ id: 1 },
+        { id: 2 },
         ]
     )
     const handleAdd = (e) => {
         e.preventDefault();
         const currentsize = ingredients.length;
-        const newIngredient = [ { id: currentsize+1} ];
+        const newIngredient = [{ id: currentsize + 1 }];
         setIngredients(
             ingredients.concat(newIngredient)
         );
-        
+
     };
     const handleRemove = (e) => {
         e.preventDefault();
-        const newIngredients = ingredients.slice(0, ingredients.length-1)
+        const newIngredients = ingredients.slice(0, ingredients.length - 1)
         setIngredients(
             newIngredients
         );
@@ -50,6 +50,14 @@ function UploadRecipes() {
                 listOfIngredients = listOfIngredients.filter(element => element !== "");
                 listOfIngredients = listOfIngredients.map(word => word.toLowerCase());
 
+                const title = document.getElementById('title').value.trim();
+                const rec = document.getElementById('Recipe').value.trim();
+
+                if (title === "" || rec === "") {
+                    alert("Title and recipe cannot be empty");
+                    return;
+                }
+
                 let recipe = {
                     Title: document.getElementById('title').value,
                     Ingredients: listOfIngredients,
@@ -57,7 +65,8 @@ function UploadRecipes() {
                     UserName: user.email,
                     UserId: user.uid,
                     upvotes: 0,
-                    Catergory: catergory
+                    Catergory: catergory,
+                    Comments: []
                 }
                 try {
                     addDoc(ref, recipe)
@@ -76,26 +85,26 @@ function UploadRecipes() {
     };
 
     return (
-        <div>
+        <div >
             <h1> Upload your recipe! </h1>
             <label> Note: You must log in before you can upload your recipe.</label>
-           
+
             <form className='cardTextArea' id="uploadForm">
                 <div>
                     <label>
                         Title: <br />
                     </label>
-                    <input id='title' type='text' size="55"/> <br />
+                    <input id='title' type='text' size="55" /> <br />
                     <label>
                         Recipe: <br />
                     </label>
                     <textarea id='Recipe' type='text' rows="10" cols="45" placeholder='Write your recipe here!' />
                 </div>
 
-                <IngredientsList 
-                onAdd={handleAdd} 
-                onRemove={handleRemove} 
-                ingredients={ingredients}
+                <IngredientsList
+                    onAdd={handleAdd}
+                    onRemove={handleRemove}
+                    ingredients={ingredients}
                 />
 
                 <div className="card">
@@ -106,7 +115,7 @@ function UploadRecipes() {
                         name="recipe_catergory"
                         value="meat"
                         id="meat"
-                        checked={catergory === "Meat"}
+                        checked={catergory === "meat"}
                         onChange={onOptionChange}
                     />
                     <label htmlFor="meat">Meat</label>

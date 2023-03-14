@@ -3,7 +3,7 @@ import AuthDetails from '../components/AuthDetails';
 
 const Login = () => {
   return (
-    <div>
+    <div className="card-center">
       <LoginForm text='Login Here!' />
       <AuthDetails />
     </div>

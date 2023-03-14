@@ -4,6 +4,7 @@ import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import GetData from "../data/getdata";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
+import Comments from './comments/Comments';
 
 
 function RenderRecipes(props) {
@@ -53,13 +54,22 @@ function RenderRecipes(props) {
     }
 
     for (let i = 0; i < props.recipeIds.length; i++) {
+        const recipe = () => {
+            console.log(props.recipeIds[i])
+            localStorage.setItem('recipe_id', props.recipeIds[i]);
+            window.location.assign('/recipe')
 
-        steps.push(<div className="card" key={i}>
-            <h2>
-            <GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
-            </h2>
-            Recipe:&nbsp;
-            <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" />
+        }
+
+        steps.push(
+          <div className="card" key={i}>
+            <div onClick={recipe}>
+              <h2>
+                <GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
+              </h2>
+              Recipe:&nbsp;
+              <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" />
+            </div>
             <h5>Recipe provided by:&nbsp;<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
             <div>
                 <button className="btn btn--alt" onClick={() => {
@@ -67,39 +77,31 @@ function RenderRecipes(props) {
                 }}>Favorite</button>
 
                 <button className="btn" onClick={() => {
-                    MadeThisHandler(props.recipeIds[i]);
                 }}>I Made This:&nbsp;
                 <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
-                </button></div></div>)
+                </button>
+             </div>
+           </div>)
         steps.push(<br key={(i+1)*(-1)}></br>)
     }
 
     let trisect = (steps.length / 3);
     const left = steps.slice(0, trisect);
-    const middle = steps.slice(trisect, trisect*2);
-    const right = steps.slice(trisect*2, steps.length);
-    if (left[0] == <br></br>) {
-        left.shift();
-    }
-    if (right[0] == <br></br>) {
-        right.shift();
-    }
-    if (middle[0] == <br></br>) {
-        middle.shift();
-    }
+    const middle = steps.slice(trisect, trisect * 2);
+    const right = steps.slice(trisect * 2, steps.length);
 
     return (
-    <div class="row">
-        <div class="column">
-            {left}
+        <div class="row">
+            <div class="column">
+                {left}
+            </div>
+            <div class="column">
+                {middle}
+            </div>
+            <div class="column">
+                {right}
+            </div>
         </div>
-        <div class="column">
-            {middle}
-        </div>
-        <div class="column">
-            {right}
-        </div>
-    </div>
     );
 
 }

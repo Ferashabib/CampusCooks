@@ -1,7 +1,7 @@
 import handleSubmit from '../handles/handlesubmit';
 import { useRef } from 'react';
-import { db, auth} from "../firebase"
-import { doc, setDoc } from "firebase/firestore"; 
+import { db, auth } from "../firebase"
+import { doc, setDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { Alert } from 'react-native';
 
@@ -72,7 +72,7 @@ function LogininForm(props) {
     return (
         <div>
             <form id="signinForm">
-                <div className='card'>
+                <div className='listcard'>
                     <div>
                         <h2>{props.text}</h2>
                         <h3>Note: All input are case sensitive.</h3>

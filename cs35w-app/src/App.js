@@ -1,13 +1,11 @@
 import React from "react";
 import './App.css';
-import database from './handles/handlesubmit';
-import { useRef } from 'react';
-import { getDatabase, ref, set } from "firebase/database";
+
 
 import './components/NavbarElement.css';
 import Route from './components/Router';
 import Navbar from './components/Navbar';
-import Comments from './comments/Comments';
+
 
 import Home from './pages';
 import About from './pages/about';
@@ -17,6 +15,7 @@ import Profile from './pages/profile';
 import Edit from './pages/edit';
 import Fav from "./pages/favorite";
 import Search from "./pages/search";
+import Recipe from "./pages/recipe";
 
 function App() {
   console.log(window.location.pathname);
@@ -26,7 +25,6 @@ function App() {
       <Navbar />
       <Route path="/">
         <Home />
-        <Comments currentUserID="1" /*Temporary, still working*/ />
       </Route>
       <Route path="/about">
         <About />
@@ -48,6 +46,8 @@ function App() {
       </Route>
       <Route path="/search">
         <Search />
+      <Route path="/recipe" >
+        <Recipe />
       </Route>
     </div>
   );

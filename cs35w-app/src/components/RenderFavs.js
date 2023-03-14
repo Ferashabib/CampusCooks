@@ -66,11 +66,18 @@ function RenderFavs(props) {
         });
     }
     for (let i = 0; i < props.recipeIds.length; i++) {
+        const recipe = () => {
+            console.log(props.recipeIds[i])
+            localStorage.setItem('recipe_id', props.recipeIds[i]);
+            window.location.assign('/recipe')
+
+        }
 
         steps.push(<div className="card" key={'recipe:' + i}>
-            <div><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
-            <div> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
-            <div><h5>Recipe provided by<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
+            <div onClick={recipe}><h2><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></h2></div>
+            <div onClick={recipe}><GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
+            <div onClick={recipe}> <h5>Catergory: <GetData collection="Upload" document={props.recipeIds[i]} field="Catergory" /> </h5></div>
+            <div onClick={recipe}><h5>Recipe provided by < GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5></div>
             <div><h5>This recipes has been made <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" /> time(s)</h5></div>
             <div>
                 <button className="btn btn--alt" onClick={() => {
@@ -78,11 +85,28 @@ function RenderFavs(props) {
                 }}>Unfavorite</button>
                 <button className="btn" onClick={() => {
                     UpvoteHandler(props.recipeIds[i]);
-                }}>I Made This Today</button></div></div>)
-
+                }}>I Made This Today</button></div><br></br></div>)
+        steps.push(<br></br>)
     }
 
-    return (<div>{steps}</div>);
+    let trisect = steps.length / 3 + (steps.length % 3);
+    const left = steps.slice(0, trisect);
+    const middle = steps.slice(trisect, trisect * 2);
+    const right = steps.slice(trisect * 2, steps.length);
+
+    return (
+        <div class="row">
+            <div class="column">
+                {left}
+            </div>
+            <div class="column">
+                {middle}
+            </div>
+            <div class="column">
+                {right}
+            </div>
+        </div>
+    );
 
 }
 

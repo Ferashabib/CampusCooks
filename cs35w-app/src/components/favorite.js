@@ -21,24 +21,28 @@ function Favorite() {
     let ids;
     const [data, setData] = useState({});
     useEffect(() => {
-        const getWeatherFromApiAsync = async () => {
+        const getUserId = async () => {
             const auth = getAuth();
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     const uid = user.uid;
+                    console.log(uid)
                     ids = await getUserData(uid);
-                    setData(ids);
+                    if (ids) {
+                        setData(ids);
+                    }
+
                 }
             })
 
         };
-        getWeatherFromApiAsync();
+        getUserId();
     }, []);
 
 
     return (
         <div>
-            <h1>Your favorited recipes:</h1>
+            <h1 className="card-center">Your favorited recipes:</h1>
             <div id="outer"><h3> <RenderFavs recipeIds={data} /></h3></div>
         </div>
 

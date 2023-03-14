@@ -48,22 +48,22 @@ const EditProfile = () => {
                 displayName: name
             });
         }
-        if (document.getElementById("color").value != " ") {
+        if (document.getElementById("color").value != "") {
             await updateDoc(userRef, {
                 FavoriteColor: document.getElementById("color").value
             });
         }
-        if (document.getElementById("bio").value != " ") {
+        if (document.getElementById("bio").value != "") {
             await updateDoc(userRef, {
                 bio: document.getElementById("bio").value
             });
         }
-        if (document.getElementById("gender").value != " ") {
+        if (document.getElementById("gender").value != "") {
             await updateDoc(userRef, {
                 gender: document.getElementById("gender").value
             });
         }
-        if (document.getElementById("birthday").value != " ") {
+        if (document.getElementById("birthday").value != "") {
             await updateDoc(userRef, {
                 birthday: document.getElementById("birthday").value
             });
@@ -81,7 +81,7 @@ const EditProfile = () => {
                 <div>
                     <label> Username: </label>
                     <input type="text" id="fname" name="fname"></input><br /><br />
-                    <label> FavoriteColor: </label>
+                    <label> Favorite Color: </label>
                     <input type="text" id="color" name="color"></input><br /><br />
                     <label> Birthday: </label>
                     <input type="text" id="birthday" name="birthday"></input><br /><br />
@@ -94,6 +94,11 @@ const EditProfile = () => {
                 <br />
             </form>
             <form onSubmit={uploadHandler} className='cardTextArea' id='photoform'>
+                <p>
+                    Note: Please click on the "Upload Image" after you choose <br/>
+                    your image file. Otherwise, your image file will not be save <br/>
+                    even you click the save button.
+                </p>
                 <label> Photo: </label>
                 <input type="file" />
                 <button type="submit"> Upload Image</button>
