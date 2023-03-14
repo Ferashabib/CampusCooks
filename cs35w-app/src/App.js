@@ -46,6 +46,7 @@ function App() {
       </Route>
       <Route path="/search">
         <Search />
+      </Route>
       <Route path="/recipe" >
         <Recipe />
       </Route>

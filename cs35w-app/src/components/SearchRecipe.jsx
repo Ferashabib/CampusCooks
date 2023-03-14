@@ -87,6 +87,7 @@ function SearchRecipe (props) {
     
     return (
         <div>
+            <br></br>
             <div>
                 <label for="select">Search by:&nbsp;</label>
                 <select id="select" onChange={changeInput}>
