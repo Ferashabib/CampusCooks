@@ -1,5 +1,5 @@
 import GetData from "../data/getdata";
-import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
+import { getDoc, doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 
@@ -92,11 +92,31 @@ const Recipe = () => {
     };
 
 
+    const [user_id, setId] = useState();
+    const getData = async (userData) => {
+        const docRef = doc(db, "Upload", userData);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setId(data.UserId);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+    };
+
+    getData(userData);
+
+    const profile = () => {
+        console.log(user_id);
+        localStorage.setItem("user_id", user_id)
+        window.location.assign('/others')
+    }
 
     return (
         <div className="card-center">
             <h2><strong><GetData collection="Upload" document={userData} field="Title" /></strong></h2>
-            <div><strong>Recipe provided by: <GetData collection="Upload" document={userData} field="UserName" /></strong></div>
+            <div><strong>Recipe provided by: <button onClick={profile}><GetData collection="Upload" document={userData} field="UserName" /></button></strong></div>
             <br></br>
             <GetData collection="Upload" document={userData} field="Recipe" />
             <br></br>
