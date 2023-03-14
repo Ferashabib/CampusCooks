@@ -16,6 +16,7 @@ import Edit from './pages/edit';
 import Fav from "./pages/favorite";
 import Search from "./pages/search";
 import Recipe from "./pages/recipe";
+import Other_profile from "./pages/others";
 
 function App() {
   console.log(window.location.pathname);
@@ -49,6 +50,9 @@ function App() {
       </Route>
       <Route path="/recipe" >
         <Recipe />
+      </Route>
+      <Route path="/others" >
+        <Other_profile />
       </Route>
     </div>
   );

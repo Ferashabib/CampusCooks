@@ -42,9 +42,15 @@ const EditProfile = () => {
             updateProfile(User, {
                 photoURL: UserPhotoURL
             });
+            await updateDoc(userRef, {
+                photoURL: UserPhotoURL
+            });
         }
         if (name != '') {
             updateProfile(User, {
+                displayName: name
+            });
+            await updateDoc(userRef, {
                 displayName: name
             });
         }
