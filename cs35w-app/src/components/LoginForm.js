@@ -20,7 +20,10 @@ function LogininForm(props) {
                     bio: "This user haven't write anything yet",
                     gender: " ",
                     birthday: " ",
-                    FavoriteColor: " "
+                    FavoriteColor: " ",
+                    displayName: "Guest",
+                    photoURL: "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png",
+                    email: userCredential.user.email
                 })
                 document.getElementById("signinForm").reset();
             })

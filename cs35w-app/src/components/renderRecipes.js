@@ -62,6 +62,7 @@ function RenderRecipes(props) {
         }
 
         steps.push(
+
           <div className="card" key={i}>
             <div onClick={recipe}>
               <h2>
@@ -88,6 +89,7 @@ function RenderRecipes(props) {
              </div>
            </div>)
         steps.push(<br key={(i+1)*(-1)}></br>)
+
     }
     
     let trisect = (steps.length / 3);
