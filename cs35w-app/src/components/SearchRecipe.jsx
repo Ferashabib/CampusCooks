@@ -39,6 +39,7 @@ function SearchRecipe (props) {
                 }
                 if (search === "") {
                     alert("Search is empty");
+                    current_selection = null;
                     return;
                 }
 
@@ -58,6 +59,7 @@ function SearchRecipe (props) {
                 }
                 if (search === "") {
                     alert("Search is empty");
+                    current_selection = null;
                     return;
                 }
 
@@ -79,6 +81,7 @@ function SearchRecipe (props) {
 
                 if (search < 0) {
                     alert("Please enter a valid cost.");
+                    current_selection = null;
                     return;
                 }
                 let cost = (doc.data().Cost);
@@ -101,6 +104,7 @@ function SearchRecipe (props) {
 
                     if (searchIngredients.length == 0) {
                         alert("Search is empty");
+                        current_selection = null;
                         return;
                     }
 
