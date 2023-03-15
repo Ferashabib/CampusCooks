@@ -80,6 +80,7 @@ function SearchRecipe (props) {
 
             //search by recipe name
             if (current_selection == "Recipe Name") {
+
                 let title = (doc.data().Title);
                 if (title) {
                     title = title.toLowerCase();
@@ -90,6 +91,7 @@ function SearchRecipe (props) {
             }
             //search by username
             else if (current_selection == "User") {
+
                 let user = (doc.data().UserName);
                 if (user) {
                     user = user.toLowerCase();
@@ -100,6 +102,7 @@ function SearchRecipe (props) {
             }
             //search by cost
             else if (current_selection == "Cost") {
+
                 let cost = (doc.data().Cost);
                 if (cost) {
                     if (search >= cost) {
@@ -109,6 +112,7 @@ function SearchRecipe (props) {
             }
             //search by ingredients
             else if (current_selection == "Ingredients") {
+
                 let dataIngredients = (doc.data().Ingredients);    
 
                 if ((dataIngredients.length <= searchIngredients.length) && (dataIngredients.length != 0)) {
