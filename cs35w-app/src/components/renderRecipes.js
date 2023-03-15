@@ -1,14 +1,14 @@
 import { db } from "../firebase"
-import React from "react";
+import React, { useEffect } from "react";
 import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import GetData from "../data/getdata";
+import GetShortRecipe from "../data/getShortRecipe";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from '@firebase/storage';
 import Comments from './comments/Comments';
 
 
 function RenderRecipes(props) {
-
 
     const favHandler = (id) => {
         const auth = getAuth();
@@ -31,7 +31,6 @@ function RenderRecipes(props) {
         });
     };
 
-
     const steps = [];
 
     async function MadeThisHandler(id) {
@@ -53,8 +52,6 @@ function RenderRecipes(props) {
                 window.location.assign("/log_in");
             }
         });
-
-
     }
 
     for (let i = 0; i < props.recipeIds.length; i++) {
@@ -62,14 +59,23 @@ function RenderRecipes(props) {
             console.log(props.recipeIds[i])
             localStorage.setItem('recipe_id', props.recipeIds[i]);
             window.location.assign('/recipe')
-
         }
 
-        steps.push(<div className="card">
-            <div onClick={recipe}><h2><GetData collection="Upload" document={props.recipeIds[i]} field="Title" /></h2>
+        steps.push(
 
-                <GetData collection="Upload" document={props.recipeIds[i]} field="Recipe" /></div>
-            <h5 onClick={recipe}>Recipe provided by: <GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
+          <div className="card" key={i}>
+            <div onClick={recipe}>
+              <h2>
+                <GetData collection="Upload" document={props.recipeIds[i]} field="Title" />
+              </h2>
+              <h4>
+                Cost: $
+                <GetData collection="Upload" document={props.recipeIds[i]} field="Cost" />
+              </h4>
+              Recipe:&nbsp;
+              <GetShortRecipe collection="Upload" document={props.recipeIds[i]} field="Recipe" />
+            </div>
+            <h5>Recipe provided by:&nbsp;<GetData collection="Upload" document={props.recipeIds[i]} field="UserName" /></h5>
             <div>
                 <button className="btn btn--alt" onClick={() => {
                     favHandler(props.recipeIds[i]);
@@ -77,20 +83,19 @@ function RenderRecipes(props) {
 
                 <button className="btn" onClick={() => {
                     MadeThisHandler(props.recipeIds[i]);
+                }}>I Made This:&nbsp;
+                <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
+                </button>
+             </div>
+           </div>)
+        steps.push(<br key={(i+1)*(-1)}></br>)
 
-
-
-                }}>I Made This <GetData collection="Upload" document={props.recipeIds[i]} field="upvotes" />
-                </button></div></div>)
-
-
-        steps.push(<br></br>)
     }
-
-    let trisect = steps.length / 3 + (steps.length % 3);
+    
+    let trisect = (steps.length / 3);
     const left = steps.slice(0, trisect);
     const middle = steps.slice(trisect, trisect * 2);
-    const right = steps.slice(trisect * 2, steps.length);
+    let right = steps.slice(trisect * 2, steps.length);
 
     return (
         <div class="row">
@@ -105,8 +110,6 @@ function RenderRecipes(props) {
             </div>
         </div>
     );
-
 }
-
 
 export default RenderRecipes;

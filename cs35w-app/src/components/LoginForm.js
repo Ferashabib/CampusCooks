@@ -20,7 +20,10 @@ function LogininForm(props) {
                     bio: "This user haven't write anything yet",
                     gender: " ",
                     birthday: " ",
-                    FavoriteColor: " "
+                    FavoriteColor: " ",
+                    displayName: "Guest",
+                    photoURL: "https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_960_720.png",
+                    email: userCredential.user.email
                 })
                 document.getElementById("signinForm").reset();
             })
@@ -77,7 +80,7 @@ function LogininForm(props) {
                         <h2>{props.text}</h2>
                         <h3>Note: All input are case sensitive.</h3>
                         <label>
-                            Email :
+                            Email:&nbsp;
                             <input type="text" name="username" ref={dataRef}
                                 onChange={(e) => dataRef.current = (e.target.value)} />
                         </label>
@@ -86,7 +89,7 @@ function LogininForm(props) {
                     <br />
                     <div>
                         <label>
-                            Password :
+                            Password:&nbsp;
                             <input type="text" name="password" ref={dataRef2}
                                 onChange={(e) => dataRef2.current = (e.target.value)} />
                         </label>

@@ -47,8 +47,23 @@ function UploadRecipes() {
                 for (let i = 1; i <= ingredients.length; i++) {
                     listOfIngredients.push(document.getElementById(("ingredient" + i)).value);
                 }
+                //remove blank
                 listOfIngredients = listOfIngredients.filter(element => element !== "");
+                //convert all to lowercase (for searching purposes)
                 listOfIngredients = listOfIngredients.map(word => word.toLowerCase());
+                //remove duplicates
+                listOfIngredients = listOfIngredients.filter((c, index) => { 
+                    return listOfIngredients.indexOf(c) === index;
+                });
+
+                const title = document.getElementById('title').value.trim();
+                const rec = document.getElementById('Recipe').value.trim();
+                const cost = document.getElementById('cost').value;
+
+                if (title === "" || rec === "" || !cost || listOfIngredients.length === 0) {
+                    alert("All fields must be filled out.");
+                    return;
+                }
 
                 let recipe = {
                     Title: document.getElementById('title').value,
@@ -58,7 +73,8 @@ function UploadRecipes() {
                     UserId: user.uid,
                     upvotes: 0,
                     Catergory: catergory,
-                    Comments: []
+                    Comments: [],
+                    Cost: document.getElementById('cost').value
                 }
                 try {
                     addDoc(ref, recipe)
@@ -70,7 +86,7 @@ function UploadRecipes() {
                 document.getElementById("uploadForm").reset();
             }
             else {
-                alert("You must sign in before upload your recipe!");
+                alert("You must sign in before uploading your recipe!");
                 window.location.assign('log_in');
             }
         });
@@ -99,71 +115,105 @@ function UploadRecipes() {
                     ingredients={ingredients}
                 />
 
-                <div className="card">
-                    <h3>Select A Catergory</h3>
+                <div>
+                    <label>
+                        Cost $: <br />
+                    </label>
+                    <input id='cost' type='number' min="0" max="1000" size="10" /> <br />
+                </div>
+                <br></br>
+                <div className="card" size="10">
+                    <h3>Select A Category</h3>
 
                     <input
                         type="radio"
                         name="recipe_catergory"
-                        value="meat"
-                        id="meat"
-                        checked={catergory === "meat"}
+                        value="Meat"
+                        id="Meat"
+                        checked={catergory === "Meat"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="meat">Meat</label>
+                    <label htmlFor="Meat">Meat</label>
 
                     <input
                         type="radio"
                         name="recipe_catergory"
-                        value="seafood"
-                        id="seafood"
-                        checked={catergory === "seafood"}
+                        value="Seafood"
+                        id="Seafood"
+                        checked={catergory === "Seafood"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="seafood">Seafood</label>
+                    <label htmlFor="Seafood">Seafood</label>
 
                     <input
                         type="radio"
                         name="recipe_catergory"
-                        value="vegan"
-                        id="vegan"
-                        checked={catergory === "vegan"}
+                        value="Vegan"
+                        id="Vegan"
+                        checked={catergory === "Vegan"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="vegan">Vegan</label>
+                    <label htmlFor="Vegan">Vegan</label>
                     <input
                         type="radio"
                         name="recipe_catergory"
-                        value="pasta"
-                        id="pasta"
-                        checked={catergory === "pasta"}
+                        value="Pasta"
+                        id="Pasta"
+                        checked={catergory === "Pasta"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="pasta">Pasta</label>
+                    <label htmlFor="Pasta">Pasta</label>
                     <input
                         type="radio"
                         name="recipe_catergory"
-                        value="salad"
-                        id="salad"
-                        checked={catergory === "salad"}
+                        value="Salad"
+                        id="Salad"
+                        checked={catergory === "Salad"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="salad">Salad</label>
-                    {/* <input
+                    <label htmlFor="Salad">Salad
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <input
                         type="radio"
                         name="recipe_catergory"
-                        value="dessert "
-                        id="dessert "
-                        checked={catergory === "dessert"}
+                        value="Dessert"
+                        id="Dessert"
+                        checked={catergory === "Dessert"}
                         onChange={onOptionChange}
                     />
-                    <label htmlFor="dessert ">dessert</label> */}
-
+                    <label htmlFor="Dessert">Dessert</label>
+                    <input
+                        type="radio"
+                        name="recipe_catergory"
+                        value="Breakfast"
+                        id="Breakfast"
+                        checked={catergory === "Breakfast"}
+                        onChange={onOptionChange}
+                    />
+                    <label htmlFor="Breakfast">Breakfast</label>
+                    <input
+                        type="radio"
+                        name="recipe_catergory"
+                        value="Soup"
+                        id="Soup"
+                        checked={catergory === "Soup"}
+                        onChange={onOptionChange}
+                    />
+                    <label htmlFor="Soup">Soup</label>
+                    <input
+                        type="radio"
+                        name="recipe_catergory"
+                        value="Snack"
+                        id="Snack"
+                        checked={catergory === "Snack"}
+                        onChange={onOptionChange}
+                    />
+                    <label htmlFor="Snack">Snack</label>
                     <p>
-                        Catergory: <strong>{catergory}</strong>
+                        Category: <strong>{catergory}</strong>
                     </p>
                 </div>
-
+                <br></br>
                 <input className='btn' onClick={handleSubmit} type="submit" value="Submit" />
             </form>
         </div>

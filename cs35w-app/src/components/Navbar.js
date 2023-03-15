@@ -17,6 +17,9 @@ function Navbar(){
             <a href="/upload" className="NavLink">
                 Upload
             </a>
+            <a href="/search" className="NavLink">
+                Search
+            </a>
             <a href="/" className="NavLink">
                 Home
             </a>
