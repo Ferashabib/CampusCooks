@@ -28,20 +28,58 @@ function SearchRecipe (props) {
 
     const GetSearch = async () => {
         let list = [];
+        let search = ""
+        let searchIngredients = [];
+        if (current_selection == "Recipe Name") {
+            if (document.getElementById("searchBar").value) {
+                search = (document.getElementById("searchBar").value).toLowerCase();
+            }
+            if (search === "") {
+                alert("Search is empty");
+                return list;
+            }
+        }
+        else if (current_selection == "User") {
+            if (document.getElementById("searchBar").value) {
+                search = (document.getElementById("searchBar").value).toLowerCase();
+            }
+            if (search === "") {
+                alert("Search is empty");
+                return list;
+            }
+        }
+        else if (current_selection == "Cost") {
+            let search_string = -1;
+            if (document.getElementById('cost').value) {
+                search_string = document.getElementById('cost').value;
+            }
+            search = parseFloat(search_string);
+
+            if (search < 0) {
+                alert("Please enter a valid cost.");
+                return list;
+            }
+        }
+        else if (current_selection == "Ingredients") {
+            for (let i = 1; i <= ingredients.length; i++) {
+                searchIngredients.push(document.getElementById(("ingredient" + i)).value);
+            }
+            searchIngredients = searchIngredients.filter(element => element !== "");
+            searchIngredients = searchIngredients.map(word => word.toLowerCase());
+            searchIngredients = searchIngredients.filter((c, index) => { 
+                return searchIngredients.indexOf(c) === index; });
+
+            if (searchIngredients.length == 0) {
+                alert("Search is empty");
+                return list;
+            }
+        }
+
         const querySnapshot = await getDocs(collection(db, "Upload"));
         querySnapshot.forEach((doc) => {
 
             //search by recipe name
             if (current_selection == "Recipe Name") {
-                let search = "";
-                if (document.getElementById("searchBar").value) {
-                    search = (document.getElementById("searchBar").value).toLowerCase();
-                }
-                if (search === "") {
-                    alert("Search is empty");
-                    return;
-                }
-
                 let title = (doc.data().Title);
                 if (title) {
                     title = title.toLowerCase();
@@ -52,15 +90,6 @@ function SearchRecipe (props) {
             }
             //search by username
             else if (current_selection == "User") {
-                let search = "";
-                if (document.getElementById("searchBar").value) {
-                    search = (document.getElementById("searchBar").value).toLowerCase();
-                }
-                if (search === "") {
-                    alert("Search is empty");
-                    return;
-                }
-
                 let user = (doc.data().UserName);
                 if (user) {
                     user = user.toLowerCase();
@@ -71,16 +100,6 @@ function SearchRecipe (props) {
             }
             //search by cost
             else if (current_selection == "Cost") {
-                let search_string = -1;
-                if (document.getElementById('cost').value) {
-                    search_string = document.getElementById('cost').value;
-                }
-                let search = parseFloat(search_string);
-
-                if (search < 0) {
-                    alert("Please enter a valid cost.");
-                    return;
-                }
                 let cost = (doc.data().Cost);
                 if (cost) {
                     if (search >= cost) {
@@ -90,48 +109,24 @@ function SearchRecipe (props) {
             }
             //search by ingredients
             else if (current_selection == "Ingredients") {
-                let searchIngredients = [];
-                for (let i = 1; i <= ingredients.length; i++) {
-                    searchIngredients.push(document.getElementById(("ingredient" + i)).value);
-                }
-                searchIngredients = searchIngredients.filter(element => element !== "");
-                searchIngredients = searchIngredients.map(word => word.toLowerCase());
-                searchIngredients = searchIngredients.filter((c, index) => { 
-                    return searchIngredients.indexOf(c) === index; });
-
-                    if (searchIngredients.length == 0) {
-                        alert("Search is empty");
-                        return;
-                    }
-
                 let dataIngredients = (doc.data().Ingredients);    
 
                 if ((dataIngredients.length <= searchIngredients.length) && (dataIngredients.length != 0)) {
                     let counter = 0;
 
-                    
-                    console.log(doc.data().Title);
-                    console.log(searchIngredients);
-                    console.log(dataIngredients);
-
                     for (let k = 0; k < dataIngredients.length; k++) {
                         for (let j = 0; j < searchIngredients.length; j++) {
-                            if (dataIngredients[k] === searchIngredients[j])
+                            if (dataIngredients[k].includes(searchIngredients[j]))
                                 counter = counter + 1;
                         }
                     }
-                    console.log(counter)
-                    console.log(dataIngredients.length)
                     if (counter >= dataIngredients.length) {
-                        console.log("pushing");
                         list.push(doc.id);
                     }
                 }
             }
             
         });
-        console.log("list:");
-        console.log(list);
         return new Promise(function(resolve, reject) {
             resolve(list);
         }) 
@@ -162,6 +157,7 @@ function SearchRecipe (props) {
     
     return (
         <div>
+        <div className="card-center">
             <br></br>
             <div>
                 <label for="select">Search by:&nbsp;</label>
@@ -215,10 +211,13 @@ function SearchRecipe (props) {
                     <button onClick={handleSubmit}>Search</button>
                 </div>
             }
+        </div>
+        <div>
             <h2>({ids.length}) Results</h2>
             <div>
                 {<RenderRecipes recipeIds={ids}/>}
             </div>
+        </div>
         </div>
     )
 }
