@@ -27,17 +27,21 @@ function SearchRecipe (props) {
     }
 
     const GetSearch = async () => {
-        let search = "";
-        if (document.getElementById("searchBar").value) {
-            search = (document.getElementById("searchBar").value).toLowerCase();
-        }
-        console.log(search);
-
         let list = [];
         const querySnapshot = await getDocs(collection(db, "Upload"));
         querySnapshot.forEach((doc) => {
 
+            //search by recipe name
             if (current_selection == "Recipe Name") {
+                let search = "";
+                if (document.getElementById("searchBar").value) {
+                    search = (document.getElementById("searchBar").value).toLowerCase();
+                }
+                if (search === "") {
+                    alert("Search is empty");
+                    return;
+                }
+
                 let title = (doc.data().Title);
                 if (title) {
                     title = title.toLowerCase();
@@ -46,7 +50,17 @@ function SearchRecipe (props) {
                     }
                 }
             }
+            //search by username
             else if (current_selection == "User") {
+                let search = "";
+                if (document.getElementById("searchBar").value) {
+                    search = (document.getElementById("searchBar").value).toLowerCase();
+                }
+                if (search === "") {
+                    alert("Search is empty");
+                    return;
+                }
+
                 let user = (doc.data().UserName);
                 if (user) {
                     user = user.toLowerCase();
@@ -55,8 +69,69 @@ function SearchRecipe (props) {
                     }
                 }
             }
+            //search by cost
+            else if (current_selection == "Cost") {
+                let search_string = -1;
+                if (document.getElementById('cost').value) {
+                    search_string = document.getElementById('cost').value;
+                }
+                let search = parseFloat(search_string);
+
+                if (search < 0) {
+                    alert("Please enter a valid cost.");
+                    return;
+                }
+                let cost = (doc.data().Cost);
+                if (cost) {
+                    if (search >= cost) {
+                        list.push(doc.id);
+                    }
+                }
+            }
+            //search by ingredients
+            else if (current_selection == "Ingredients") {
+                let searchIngredients = [];
+                for (let i = 1; i <= ingredients.length; i++) {
+                    searchIngredients.push(document.getElementById(("ingredient" + i)).value);
+                }
+                searchIngredients = searchIngredients.filter(element => element !== "");
+                searchIngredients = searchIngredients.map(word => word.toLowerCase());
+                searchIngredients = searchIngredients.filter((c, index) => { 
+                    return searchIngredients.indexOf(c) === index; });
+
+                    if (searchIngredients.length == 0) {
+                        alert("Search is empty");
+                        return;
+                    }
+
+                let dataIngredients = (doc.data().Ingredients);    
+
+                if ((dataIngredients.length <= searchIngredients.length) && (dataIngredients.length != 0)) {
+                    let counter = 0;
+
+                    
+                    console.log(doc.data().Title);
+                    console.log(searchIngredients);
+                    console.log(dataIngredients);
+
+                    for (let k = 0; k < dataIngredients.length; k++) {
+                        for (let j = 0; j < searchIngredients.length; j++) {
+                            if (dataIngredients[k] === searchIngredients[j])
+                                counter = counter + 1;
+                        }
+                    }
+                    console.log(counter)
+                    console.log(dataIngredients.length)
+                    if (counter >= dataIngredients.length) {
+                        console.log("pushing");
+                        list.push(doc.id);
+                    }
+                }
+            }
             
         });
+        console.log("list:");
+        console.log(list);
         return new Promise(function(resolve, reject) {
             resolve(list);
         }) 
@@ -93,25 +168,53 @@ function SearchRecipe (props) {
                 <select id="select" onChange={changeInput}>
                     <option value="Recipe Name">Recipe Name</option>
                     <option value="Ingredients">Ingredients</option>
-                    <option value="Price">Price</option>
+                    <option value="Cost">Cost</option>
                     <option value="User">User</option>
                 </select>
             </div>
             <br></br>
 
-            {((current_selection == "Recipe Name") || (current_selection == "User")) && <div>
+            {
+            ((current_selection == "Recipe Name")) && <div>
+                <h3>
+                    Find recipes by name!
+                </h3>
                 <input type="text" id="searchBar" size="40"></input>
                  <button onClick={handleSubmit}>Search</button>
-            </div>}
-
+            </div>
+            }
+            {
+            ((current_selection == "User")) && <div>
+                <h3>
+                    Find recipes by User!
+                </h3>
+                <input type="text" id="searchBar" size="40"></input>
+                 <button onClick={handleSubmit}>Search</button>
+            </div>
+            }
             {
                 (current_selection == "Ingredients") &&
                 <div>
+                    <h3>
+                        Find recipes you can make with ingredients you have on hand!
+                    </h3>
                     <IngredientsList onAdd={handleAdd} onRemove={handleRemove} ingredients={ingredients}/>
-                    <button onClick={handleSubmit}>Search (NOT YET IMPLEMENTED)</button>
+                    <button onClick={handleSubmit}>Search</button>
                 </div>
             }
-
+            {
+                (current_selection == "Cost") &&
+                <div>
+                    <h3>
+                        Find recipes within your budget!
+                    </h3>
+                    <label for='cost'>
+                        Cost $:&nbsp;
+                    </label>
+                    <input id='cost' type='number' min="0" max="1000" size="10" /> <br /> <br />
+                    <button onClick={handleSubmit}>Search</button>
+                </div>
+            }
             <h2>({ids.length}) Results</h2>
             <div>
                 {<RenderRecipes recipeIds={ids}/>}
