@@ -12,7 +12,7 @@ const About = () => {
   return (
     <div>
 
-      <h1 className="card-center">  <GetData collection="recipeAppAbout" document="about" field="headline" /></h1>
+      <h1 className="card-center welcome">  <GetData collection="recipeAppAbout" document="about" field="headline" /></h1>
       <h3 className="card-center">  <GetData collection="recipeAppAbout" document="about" field="introduction" /></h3>
 
 
