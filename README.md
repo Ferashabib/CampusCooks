@@ -6,7 +6,7 @@ recipes and communicate cooking experience with others.
 
 # Please do the following to run the app:
 git clone https://github.com/PanFishz/CS35W.git</br>
-cd CS35W</br>
+cd CampusCooks</br>
 cd cs35w-app</br>
 npm install</br>
 npm start</br>
