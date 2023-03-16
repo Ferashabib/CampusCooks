@@ -9,8 +9,10 @@ favorites list, and providing feedback to recipe uploaders, Campus Cooks is prov
 to be a useful tool for all college students.
 
 # Please do the following to run the app:
+```
 git clone https://github.com/PanFishz/CS35W.git</br>
 cd CampusCooks</br>
 cd cs35w-app</br>
 npm install</br>
 npm start</br>
+```
