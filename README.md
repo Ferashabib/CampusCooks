@@ -10,7 +10,7 @@ to be a useful tool for all college students.
 
 # Please do the following to run the app:
 ```
-git clone https://github.com/PanFishz/CS35W.git
+git clone https://github.com/Ferashabib/CampusCooks.git
 cd CampusCooks
 cd cs35w-app
 npm install
